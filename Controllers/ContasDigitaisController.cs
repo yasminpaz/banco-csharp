@@ -21,25 +21,10 @@ namespace ApiBancoDigital.Controllers
             _context = context;
         }
 
-        // GET: api/ContasDigitais
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ContaDigital>>> GetContasDigitais()
         {
             return await _context.ContasDigitais.ToListAsync();
-        }
-
-        // GET: api/ContasDigitais/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ContaDigital>> GetContaDigital(int id)
-        {
-            var contaDigital = await _context.ContasDigitais.FindAsync(id);
-
-            if (contaDigital == null)
-            {
-                return NotFound();
-            }
-
-            return contaDigital;
         }
 
         [HttpPut("{id}")]
@@ -78,22 +63,6 @@ namespace ApiBancoDigital.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetContaDigital", new { id = contaDigital.Id }, contaDigital);
-        }
-
-        // DELETE: api/ContasDigitais/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContaDigital(int id)
-        {
-            var contaDigital = await _context.ContasDigitais.FindAsync(id);
-            if (contaDigital == null)
-            {
-                return NotFound();
-            }
-
-            _context.ContasDigitais.Remove(contaDigital);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         [HttpPut("/{id}/sacar")]
